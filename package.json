@@ -1,0 +1,23 @@
+{
+  "name": "lourencoin-ecommerce-playwright",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ts-built/index.js",
+  "scripts": {
+    "gcp-build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@google-cloud/functions-framework": "^3.1.2",
+    "@types/node": "^18.11.15",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "ansi-colors": "^4.1.3",
+    "chrome-aws-lambda": "^10.1.0",
+    "playwright": "1.14.1",
+    "playwright-core": "1.14.1"
+  }
+}
