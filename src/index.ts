@@ -140,6 +140,6 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
 }
 
 export const run: HttpFunction = async (req: CFRequest, res: CFResponse) => {
-  await task(100, 30);
+  await task(100, 10);
   res.send('Fim\n');
 };

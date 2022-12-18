@@ -19,7 +19,7 @@ gcloud projects list
 # escolher o projeto correto
 gcloud config set project <nome do projeto com cloud funcions ativado>
 # cria a cloud function com o código node em index.ts
-gcloud functions deploy run --entry-point run --allow-unauthenticated --trigger-http --runtime nodejs16 --memory=1G --region=us-central1 --max-instances=4 --timeout=3600 --gen2
+gcloud functions deploy run --entry-point run --allow-unauthenticated --trigger-http --runtime nodejs16 --memory=1G --region=us-central1 --max-instances=10 --timeout=3600 --gen2
 ```
 
 Para executar a função, em teoria daria para fazer `gcloud functions call run`, mas tem bug para gen2 fazendo dessa forma.
@@ -34,4 +34,3 @@ aproximadamente 1000 usuários (ou fluxos), e tem duração de 30 minutos.
 # Referências:
 
 - Como usar Cloud Functions com typescript: https://duff.blog/cloud-functions-with-typescript
-- 
