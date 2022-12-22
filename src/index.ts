@@ -33,7 +33,7 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
     await Promise.allSettled(
       new Array(parallel).fill(3).map(async (_, idx) => {
         let page: Page, context: BrowserContext;
-        const SKIP_THRESHOLD = 0.02 * (idx + 1); // de 2% a 40%
+        const SKIP_THRESHOLD = 0.2; // de 2% a 40%
 
         try {
           context = await browser.newContext({
@@ -53,12 +53,23 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
             }
           });
 
+          // Navegações para popular lista de Ads
+          await page.goto('https://google.com.br', {
+            waitUntil: 'networkidle',
+          });
+          await page.goto('https://google.com', { waitUntil: 'networkidle' });
+          await page.goto('https://youtube.com', { waitUntil: 'networkidle' });
+          await page.goto('https://www.nytimes.com/');
+          await page.click('[data-testid="GDPR-accept"]');
+          await page.reload({ waitUntil: 'networkidle' });
+
           // 2 disparos de view_promotion
           await Promise.all([
             page.goto(
-              'https://louren.co.in/ecommerce/home.html?utm_source=ecommerce06&utm_medium=ecommerce06&utm_campaign=ecommerce06',
+              'https://louren.co.in/ecommerce/home.html',
               {
                 waitUntil: 'load',
+                referer: 'https://google.com/',
               }
             ),
             page.waitForRequest(/google.*collect\?v=2/),
@@ -140,6 +151,8 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
 }
 
 export const run: HttpFunction = async (req: CFRequest, res: CFResponse) => {
+  const t0 = new Date().getTime();
   await task(100, 10);
-  res.send('Fim\n');
+  const elapsedMin = (new Date().getTime() - t0) / 60000;
+  res.send(`Finalizou em ${elapsedMin} min.`);
 };
