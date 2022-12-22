@@ -21,7 +21,7 @@ gcloud config get project
 # escolher o projeto correto
 gcloud config set project <nome do projeto com cloud funcions ativado>
 # cria a cloud function com o código node em index.ts
-gcloud functions deploy run --entry-point run --allow-unauthenticated --trigger-http --runtime nodejs16 --memory=1G --region=us-central1 --max-instances=20 --timeout=3600 --gen2
+gcloud functions deploy run --entry-point run --allow-unauthenticated --trigger-http --runtime nodejs16 --memory=2G --region=us-central1 --max-instances=20 --timeout=3600 --gen2
 ```
 
 Para executar a função, em teoria daria para fazer `gcloud functions call run`, mas tem bug para gen2 fazendo dessa forma.

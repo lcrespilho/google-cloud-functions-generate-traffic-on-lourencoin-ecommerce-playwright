@@ -55,23 +55,24 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
 
           // Navegações para popular lista de Ads
           await page.goto('https://google.com.br', {
+            timeout: 60000,
             waitUntil: 'networkidle',
           });
-          await page.goto('https://google.com', { waitUntil: 'networkidle' });
-          await page.goto('https://youtube.com', { waitUntil: 'networkidle' });
-          await page.goto('https://www.nytimes.com/');
-          await page.click('[data-testid="GDPR-accept"]');
-          await page.reload({ waitUntil: 'networkidle' });
+          await page.goto('https://google.com', {
+            timeout: 60000,
+            waitUntil: 'networkidle',
+          });
+          await page.goto('https://youtube.com', {
+            timeout: 60000,
+            waitUntil: 'networkidle',
+          });
 
           // 2 disparos de view_promotion
           await Promise.all([
-            page.goto(
-              'https://louren.co.in/ecommerce/home.html',
-              {
-                waitUntil: 'load',
-                referer: 'https://google.com/',
-              }
-            ),
+            page.goto('https://louren.co.in/ecommerce/home.html', {
+              waitUntil: 'load',
+              referer: 'https://google.com/',
+            }),
             page.waitForRequest(/google.*collect\?v=2/),
           ]);
 
