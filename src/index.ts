@@ -33,7 +33,7 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
     await Promise.allSettled(
       new Array(parallel).fill(3).map(async (_, idx) => {
         let page: Page, context: BrowserContext;
-        const SKIP_THRESHOLD = 0.2; // de 2% a 40%
+        const SKIP_THRESHOLD = 0.2;
 
         try {
           context = await browser.newContext({
@@ -153,7 +153,7 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
 
 export const run: HttpFunction = async (req: CFRequest, res: CFResponse) => {
   const t0 = new Date().getTime();
-  await task(100, 10);
+  await task(40, 10);
   const elapsedMin = (new Date().getTime() - t0) / 60000;
   res.send(`Finalizou em ${elapsedMin} min.`);
 };
