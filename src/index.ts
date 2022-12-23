@@ -153,7 +153,8 @@ async function task(whileCounter: number = 1, parallel: number = 1) {
 
 export const run: HttpFunction = async (req: CFRequest, res: CFResponse) => {
   const t0 = new Date().getTime();
-  await task(40, 10);
+  await task(30, 10);
   const elapsedMin = (new Date().getTime() - t0) / 60000;
+  console.log(`Finalizou em ${elapsedMin} min.`);
   res.send(`Finalizou em ${elapsedMin} min.`);
 };
